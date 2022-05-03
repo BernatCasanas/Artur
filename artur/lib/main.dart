@@ -1,7 +1,23 @@
+import 'package:artur/dataStructure.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 var backColor = const Color.fromRGBO(248, 228, 212, 1);
+TypeActivity typeActivity = TypeActivity.VOZ;
+List<Activity> activities = [
+  Activity(TypeActivity.PRESENCIAL, 90, "Sant Antoni", false,
+      "Tour presencial mostrando las calles de Sant Antoni"),
+  Activity(TypeActivity.VOZ, 25, "Sagrada Familia", true,
+      "Tour en voz explicando la historia de cómo fue construida la Sagrada Familia"),
+  Activity(TypeActivity.VOZ, 30, "Plaça Catalunya", true,
+      "Tour en voz explicando la historia de los lugares icónicos de Plaça Catalunya"),
+  Activity(TypeActivity.PRESENCIAL, 60, "Plaça Catalunya", true,
+      "Tour presencial mostrando los lugares icónicos de Plaça Catalunya"),
+  Activity(TypeActivity.PRESENCIAL, 60, "Sagrada Familia", true,
+      "Tour presencial mostrando el interior de la Sagrada Familia"),
+  Activity(TypeActivity.VOZ, 20, "Sant Antoni", false,
+      "Tour en voz explicando la historia de las calles de Sant Antoni"),
+];
 
 void main() {
   runApp(const MyApp());
@@ -107,8 +123,6 @@ class Search extends StatefulWidget {
   State<Search> createState() => _SearchState();
 }
 
-bool vozClicked = true;
-
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
@@ -132,20 +146,21 @@ class _SearchState extends State<Search> {
                         child: TextButton(
                           onPressed: () {
                             setState(() {
-                              vozClicked = true;
+                              typeActivity = TypeActivity.VOZ;
                             });
                           },
                           child: Text(
                             "VOZ",
                             style: TextStyle(
                               fontSize: 18,
-                              color:
-                                  vozClicked ? Colors.red[900] : Colors.black,
+                              color: typeActivity == TypeActivity.VOZ
+                                  ? Colors.red[900]
+                                  : Colors.black,
                             ),
                           ),
                         ),
                       ),
-                      vozClicked
+                      typeActivity == TypeActivity.VOZ
                           ? Container(
                               color: Colors.white,
                               height: 15,
@@ -164,20 +179,21 @@ class _SearchState extends State<Search> {
                         child: TextButton(
                           onPressed: () {
                             setState(() {
-                              vozClicked = false;
+                              typeActivity = TypeActivity.PRESENCIAL;
                             });
                           },
                           child: Text(
                             "PRESENCIAL",
                             style: TextStyle(
                               fontSize: 18,
-                              color:
-                                  !vozClicked ? Colors.red[900] : Colors.black,
+                              color: typeActivity == TypeActivity.PRESENCIAL
+                                  ? Colors.red[900]
+                                  : Colors.black,
                             ),
                           ),
                         ),
                       ),
-                      !vozClicked
+                      typeActivity == TypeActivity.PRESENCIAL
                           ? Container(
                               color: Colors.white,
                               height: 15,
@@ -189,9 +205,46 @@ class _SearchState extends State<Search> {
               ],
             ),
             Expanded(
-                child: Container(
-              color: Colors.white,
-            ))
+              child: Container(
+                color: Colors.white,
+                child: ListView.builder(
+                  itemCount: activities.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return activities[index].type == typeActivity
+                        ? SizedBox(
+                            height: 90,
+                            child: Center(
+                              child: Card(
+                                elevation: 6,
+                                child: Center(
+                                  child: ListTile(
+                                    trailing: Text(
+                                      activities[index].hasAR ? "AR" : "",
+                                      style: TextStyle(
+                                          color: Colors.orange[900],
+                                          fontSize: 15),
+                                    ),
+                                    title: Text(activities[index].name),
+                                    subtitle:
+                                        Text(activities[index].description),
+                                    leading: Text(
+                                      activities[index].duration.toString() +
+                                          "'",
+                                      style: TextStyle(
+                                          color: Colors.orange[900],
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container();
+                  },
+                ),
+              ),
+            )
           ],
         ),
       ),
