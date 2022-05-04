@@ -1,4 +1,5 @@
 import 'package:artur/dataStructure.dart';
+import 'package:artur/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     const List<Widget> tabs = <Widget>[
       MapScreen(),
       Search(),
-      User(),
+      Profile(),
     ];
 
     return SafeArea(
@@ -249,16 +250,5 @@ class _SearchState extends State<Search> {
         ),
       ),
     ]);
-  }
-}
-
-class User extends StatelessWidget {
-  const User({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: backColor,
-    );
   }
 }
