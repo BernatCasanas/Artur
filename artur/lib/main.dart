@@ -1,24 +1,11 @@
 import 'package:artur/dataStructure.dart';
 import 'package:artur/profile.dart';
+import 'package:artur/tourView.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 var backColor = const Color.fromRGBO(248, 228, 212, 1);
 TypeActivity typeActivity = TypeActivity.VOZ;
-List<Activity> activities = [
-  Activity(TypeActivity.PRESENCIAL, 90, "Sant Antoni", false,
-      "Tour presencial mostrando las calles de Sant Antoni"),
-  Activity(TypeActivity.VOZ, 25, "Sagrada Familia", true,
-      "Tour en voz explicando la historia de cómo fue construida la Sagrada Familia"),
-  Activity(TypeActivity.VOZ, 30, "Plaça Catalunya", true,
-      "Tour en voz explicando la historia de los lugares icónicos de Plaça Catalunya"),
-  Activity(TypeActivity.PRESENCIAL, 60, "Plaça Catalunya", true,
-      "Tour presencial mostrando los lugares icónicos de Plaça Catalunya"),
-  Activity(TypeActivity.PRESENCIAL, 60, "Sagrada Familia", true,
-      "Tour presencial mostrando el interior de la Sagrada Familia"),
-  Activity(TypeActivity.VOZ, 20, "Sant Antoni", false,
-      "Tour en voz explicando la historia de las calles de Sant Antoni"),
-];
 
 void main() {
   runApp(const MyApp());
@@ -220,6 +207,16 @@ class _SearchState extends State<Search> {
                                 elevation: 6,
                                 child: Center(
                                   child: ListTile(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProductDetailsView(
+                                                  activity: activities[index],
+                                                )),
+                                      );
+                                    },
                                     trailing: Text(
                                       activities[index].hasAR ? "AR" : "",
                                       style: TextStyle(

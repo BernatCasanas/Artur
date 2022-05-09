@@ -13,14 +13,17 @@ class Profile extends StatelessWidget {
             Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.bottomCenter,
-                children: const [
-                  FittedBox(
-                    child: Image(
-                        fit: BoxFit.fitHeight,
-                        image: NetworkImage(
-                            'https://viajes.nationalgeographic.com.es/medio/2018/05/08/camino-real-praga_ae560466.jpg')),
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const FittedBox(
+                      child: Image(
+                          fit: BoxFit.fitWidth,
+                          image: NetworkImage(
+                              'https://www.viajarpraga.com/img/sobre-praga.jpg')),
+                    ),
                   ),
-                  Positioned(
+                  const Positioned(
                       bottom: -50.0,
                       child: CircleAvatar(
                         radius: 80,
