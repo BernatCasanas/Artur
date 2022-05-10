@@ -19,27 +19,35 @@ class ProductDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kBgColor,
-      // appBar: AppBar(
-      //   backgroundColor: AppColors.kBgColor,
-      //   elevation: 0,
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //     icon: const Icon(
-      //       Ionicons.chevron_back,
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      // ),
       body: Column(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * .35,
-            width: MediaQuery.of(context).size.width,
-            child: FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Image(image: NetworkImage(activity.image))),
+          Stack(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .35,
+                width: MediaQuery.of(context).size.width,
+                child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Image(image: NetworkImage(activity.image))),
+              ),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 40,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    iconSize: 35,
+                    icon: const Icon(
+                      Ionicons.chevron_back,
+                      color: Colors.black,
+                    ),
+                  )
+                ],
+              )
+            ],
           ),
           Expanded(
             child: Stack(
