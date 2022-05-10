@@ -16,9 +16,10 @@ class Profile extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     child: const FittedBox(
                       child: Image(
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.fitHeight,
                           image: NetworkImage(
                               'https://www.viajarpraga.com/img/sobre-praga.jpg')),
                     ),
@@ -39,7 +40,7 @@ class Profile extends StatelessWidget {
               height: 45,
             ),
             const ListTile(
-              title: Center(child: Text('Bernat Casañas')),
+              title: Center(child: Text('Artur')),
               subtitle:
                   Center(child: Text('Explorador, insaciable y aventurero')),
             ),
